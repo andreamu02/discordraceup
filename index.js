@@ -95,7 +95,7 @@ bot.on("interactionCreate", async (i) => {
   }
 
   // /invite
-  if (i.commandName === "invite") {
+  if (i.commandName === "call") {
     let target = i.options.getMember("user");
     let member = i.member;
     let idx = ROOM_ROLE_IDS.findIndex((r) => member.roles.cache.has(r));

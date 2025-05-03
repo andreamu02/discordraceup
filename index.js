@@ -123,7 +123,7 @@ async function tryAssignRoom() {
     let freeIndex = occupied.findIndex((v) => !v);
     if (freeIndex === -1) {
       // No rooms free
-      (await guild.channels.fetch(REQUEST_CHANNEL_ID)).send(
+      await member.send(
         `<@${userId}> 🚫 All rooms are full. You remain in queue.`,
       );
       break;
@@ -138,9 +138,8 @@ async function tryAssignRoom() {
     occupied[freeIndex] = true;
     queue.shift();
     await member.roles.add(ROOM_ROLE_IDS[freeIndex]);
-    (await guild.channels.fetch(REQUEST_CHANNEL_ID)).send(
-      `<@${userId}> ✅ You’ve been assigned to Room ${freeIndex + 1}!`,
-    );
+    await member.send(`✅ You’ve been assigned to Room ${freeIndex + 1}!`);
+
 
     // Wait for them to leave voice before starting 30-min timer
   }
